@@ -65,5 +65,5 @@ def groupSamplingPoint(point_layer, output_layer) :
 points_along_line(river_layer, ouptut_layer_path, split_dist, extend_dist)
 #	製作圖表用索引欄位
 arcpy.CalculateField_management('River_temp_layer', 'ForSheet', "int(f'{!Code![-5]}{int(!Code![-4:])}')", 'PYTHON3', '', 'LONG')
-#	將raster數值丟進點圖層
-arcpy.sa.ExtractValuesToPoints('River_temp_layer', in_raster, 'Raster_value_river_layer', 'NONE', 'VALUE_ONLY')
+# #	將raster數值丟進點圖層
+# arcpy.sa.ExtractValuesToPoints('River_temp_layer', in_raster, 'Raster_value_river_layer', 'NONE', 'VALUE_ONLY')
