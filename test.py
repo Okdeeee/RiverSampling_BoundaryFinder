@@ -46,6 +46,8 @@ def FindRillPoint(avg_list, group_list) :
 					ThirdPoint = avg
 	if SecondPoint :
 		returnList.append(group_list[-1][0])
+	if len(returnList) == 0 :
+		returnList = [group_list[0][-1], group_list[-1][0]]
 	return returnList
 
 arcpy.CreateFeatureclass_management(os.path.dirname(output_point_name), os.path.basename(output_point_name), 'POINT', has_m= 'DISABLED', has_z= 'DISABLED', spatial_reference= arcpy.SpatialReference(3826))
