@@ -1,7 +1,5 @@
-# coding=utf-8
 import arcpy
 import os
-from arcpy import arc
 import numpy
 
 group_layer = arcpy.GetParameter(0)
@@ -53,23 +51,18 @@ def FindRillPoint(avg_list, group_list) :
 	return returnList
 
 arcpy.CreateFeatureclass_management(os.path.dirname(output_point_name), os.path.basename(output_point_name), 'POINT', has_m= 'DISABLED', has_z= 'DISABLED', spatial_reference= arcpy.SpatialReference(3826))
-# arcpy.AddFields_management(output_point_name, [
-# 	['Code', 'TEXT', 'Code'],
-# 	['ForSheet', 'LONG', 'ForSheet'],
-# 	['RASTERVALU', 'DOUBLE', 'RASTERVALU']
-# ])
-
-arcpy.AddField_management(output_point_name, 'Code', 'TEXT')
-arcpy.AddField_management(output_point_name, 'ForSheet', 'LONG')
-arcpy.AddField_management(output_point_name, 'RASTERVALU', 'DOUBLE')
-
+arcpy.AddFields_management(output_point_name, [
+	['Code', 'TEXT', 'Code'],
+	['ForSheet', 'LONG', 'ForSheet'],
+	['RASTERVALU', 'DOUBLE', 'RASTERVALU']
+])
 
 cursor = arcpy.da.InsertCursor(output_point_name, ['Code', 'ForSheet', 'RASTERVALU', 'Shape@'])
 code_list = list(set([row[0][:-5] for row in arcpy.da.SearchCursor(group_layer, ['Code'])]))
 code_list.sort()
 for code in code_list :
 	# arcpy.MakeFeatureLayer_management(group_layer, 'Group_temp_layer', f"Code LIKE '{code}%'")
-	rows = arcpy.da.SearchCursor(group_layer, ['Code', 'ForSheet', 'RASTERVALU', 'Shape@'], where_clause= "Code LIKE '{}%'".format(code), sql_clause= (None, "ORDER BY ForSheet"))
+	rows = arcpy.da.SearchCursor(group_layer, ['Code', 'ForSheet', 'RASTERVALU', 'Shape@'], where_clause= f"Code LIKE '{code}%'", sql_clause= (None, "ORDER BY ForSheet"))
 	groups = []
 	temp_list = []
 
