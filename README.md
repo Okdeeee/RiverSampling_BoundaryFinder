@@ -35,7 +35,7 @@
 **輸出圖層**
 > ![](https://i.imgur.com/k3pspR0.png)
 
-2. **Extract Value by Point**
+2. **Extract Value to Point**
 > 詳見 https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/extract-values-to-points.htm
 為取樣點寫入對應dem的網格值
 
