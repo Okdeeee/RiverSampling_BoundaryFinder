@@ -14,7 +14,7 @@
 
 ###    程式參數輸入：
 
-**River Split Point and Sampling**
+1. **River Split Point and Sampling**
 > ![](https://i.imgur.com/S2ESZce.png)
 * River Layer：
     >輸入河流的中心線Shapefile
@@ -35,11 +35,11 @@
 **輸出圖層**
 > ![](https://i.imgur.com/k3pspR0.png)
 
-**Extract Value by Point**
+2. **Extract Value by Point**
 > 詳見 https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/extract-values-to-points.htm
 為取樣點寫入對應dem的網格值
 
-**River find boundary point**
+3. **River find boundary point**
 > ![](https://i.imgur.com/pDwfGge.png)
 *    Sample Point Layer : 
 > 輸入Extract Value By Point工具生成的點圖層
