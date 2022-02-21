@@ -2,6 +2,8 @@
 ### 功能：
 這個工具主要功能是讓使用者輸入河流中心線的shp以及DEM，找出可能是河流邊界的點，最後輸出為點圖層。
 ###    使用流程：
+工具為ArcGIS Script Tool，在ArcGIS上開啟.tbx檔案即可，RiverSplit.tbx為ArcGIS Pro的版本；RiverSplit_ArcMap.tbx為ArcMap的版本。
+
 1.	River split point and sampling >>
 2.	extract value by point (ArcGIS SA Tool)>>
 3.	River find boundary point
@@ -13,8 +15,7 @@
 ###    程式參數輸入：
 
 **River Split Point and Sampling**
-
-![](https://i.imgur.com/S2ESZce.png)
+> ![](https://i.imgur.com/S2ESZce.png)
 * River Layer：
     >輸入河流的中心線Shapefile
 * Output Layer Path：
@@ -32,16 +33,14 @@
 
 
 **輸出圖層**
-
-![](https://i.imgur.com/k3pspR0.png)
+> ![](https://i.imgur.com/k3pspR0.png)
 
 **Extract Value by Point**
-詳見 https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/extract-values-to-points.htm
+> 詳見 https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/extract-values-to-points.htm
 為取樣點寫入對應dem的網格值
 
 **River find boundary point**
-
-![](https://i.imgur.com/pDwfGge.png)
+> ![](https://i.imgur.com/pDwfGge.png)
 *    Sample Point Layer : 
 > 輸入Extract Value By Point工具生成的點圖層
 *    Output Point Layer : 
@@ -50,5 +49,4 @@
    > 設定河流紋溝判斷高度落差的門檻值，單位為公尺
    > 
 **輸出成果**
-
-![](https://i.imgur.com/AwSjigZ.png)
+> ![](https://i.imgur.com/AwSjigZ.png)
