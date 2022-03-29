@@ -57,16 +57,17 @@ arcpy.AddFields_management(output_point_name, [
 	['RASTERVALU', 'DOUBLE', 'RASTERVALU']
 ])
 
-cursor = arcpy.da.InsertCursor(output_point_name, ['Code', 'ForSheet', 'RASTERVALU', 'Shape@'])
+cursor = arcpy.da.InsertCursor(output_point_name, ['ForSheet', 'Code', 'RASTERVALU', 'Shape@'])
 code_list = list(set([row[0][:-5] for row in arcpy.da.SearchCursor(group_layer, ['Code'])]))
 code_list.sort()
 for code in code_list :
 	# arcpy.MakeFeatureLayer_management(group_layer, 'Group_temp_layer', f"Code LIKE '{code}%'")
-	rows = arcpy.da.SearchCursor(group_layer, ['Code', 'ForSheet', 'RASTERVALU', 'Shape@'], where_clause= f"Code LIKE '{code}%'", sql_clause= (None, "ORDER BY ForSheet"))
+	rows = arcpy.da.SearchCursor(group_layer, ['ForSheet', 'Code', 'RASTERVALU', 'Shape@'], where_clause= f"Code LIKE '{code}%'", sql_clause= (None, "ORDER BY ForSheet ASC"))
 	groups = []
 	temp_list = []
 
-	for count, row in enumerate(rows) :
+	for count, row in enumerate(sorted(rows)) :
+		# arcpy.AddMessage(row[0])
 		if count != 0 :
 			if abs(row[2]-base) > threshold :
 				groups.append(temp_list)
@@ -77,7 +78,7 @@ for code in code_list :
 			base = row[2]    
 			temp_list.append(row)
 	groups.append(temp_list)     
-
+	# arcpy.AddMessage(groups)
 	avg_list= [numpy.mean([j[2] for j in i]) for i in groups]
 	
 	rill_point = FindRillPoint(avg_list, groups)
